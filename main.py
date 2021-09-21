@@ -29,7 +29,7 @@ def on_close(ws): print("Socket Closed")
 def websocket_test():
     websocket.enableTrace(True)
     ws_test = websocket.WebSocketApp(
-        "ws://" + server_name + urls.event_stream_url(event_code),
+        scorekeeper_urls.event_stream_url(server_name, event_code),
         on_message=on_message,
         on_error=on_error,
         on_close=on_close)
