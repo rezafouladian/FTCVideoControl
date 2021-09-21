@@ -45,7 +45,10 @@ def event_get_all_url(hostname):
     }
     """
 
-    return http_url_start(hostname) + "/api/v1/events/"
+    if use_ssl:
+        return https_url_start(hostname) + "/api/v1/events/"
+    else:
+        return http_url_start(hostname) + "/api/v1/events/"
 
 
 def event_get_url(hostname, code):
@@ -65,15 +68,25 @@ def event_get_url(hostname, code):
     }
     """
 
-    return http_url_start(hostname) + "/api/v1/events/" + code + "/"
+    if use_ssl:
+        return https_url_start(hostname) + "/api/v1/events/" + code + "/"
+    else:
+        return http_url_start(hostname) + "/api/v1/events/" + code + "/"
 
 
 def event_awards_url(hostname, code):
-    return http_url_start(hostname) + "/api/v2/events/" + code + "/awards/"
+    if use_ssl:
+        return https_url_start(hostname) + \
+            "/api/v2/events/" + code + "/awards/"
+    else:
+        return http_url_start(hostname) + "/api/v2/events/" + code + "/awards/"
 
 
 def event_full_details_url(hostname, code):
-    return http_url_start(hostname) + "/api/v2/events/" + code + "/full/"
+    if use_ssl:
+        return https_url_start(hostname) + "/api/v2/events/" + code + "/full/"
+    else:
+        return http_url_start(hostname) + "/api/v2/events/" + code + "/full/"
 
 
 def event_stream_url(hostname, code):
