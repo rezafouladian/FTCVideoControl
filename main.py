@@ -8,9 +8,9 @@ import scorekeeper_urls
 
 config = ConfigParser()
 
-# Temporary variables
-server_name = "localhost"
-event_code = "test1"
+# Global variables
+hostname = ""
+event_code = ""
 
 
 def write_config():
@@ -43,6 +43,16 @@ def create_config_file():
     initialize_sections()
 
 
+def load_config():
+    global hostname
+    global event_code
+
+    config.read('config.ini')
+
+    hostname = config.get('scorekeeper', 'hostname')
+    event_code = config.get('scorekeeper', 'event_code')
+
+
 # Websocket code
 def on_message(ws, message):
     update_type = json.loads(message)["updateType"]
@@ -60,7 +70,7 @@ def on_close(ws): print("Socket Closed")
 def websocket_test():
     websocket.enableTrace(True)
     ws_test = websocket.WebSocketApp(
-        scorekeeper_urls.event_stream_url(server_name, event_code),
+        scorekeeper_urls.event_stream_url(hostname, event_code),
         on_message=on_message,
         on_error=on_error,
         on_close=on_close)
@@ -75,5 +85,6 @@ if __name__ == "__main__":
         config.read('config.ini')
         if not config.has_section('scorekeeper'):
             initialize_sections()
+        load_config()
 
     websocket_test()
