@@ -1,7 +1,7 @@
 import websocket
 import json
 from configparser import ConfigParser
-import urls
+import scorekeeper_urls
 
 # Temporary variables
 server_name = "localhost"
