@@ -6,6 +6,10 @@ import settings
 import atem
 import scorekeeper_urls
 
+# TODO:
+#  Rate Limiting
+
+
 # Global variables
 hostname = ""
 event_code = ""

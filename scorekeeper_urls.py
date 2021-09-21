@@ -13,7 +13,7 @@ def http_url_start(hostname):
 
 def https_url_start(hostname):
     """Add https:// and a trailing backslash to the server name"""
-    # TODO SSL support
+    # TODO: SSL support
 
     return "https://" + hostname + "/"
 
