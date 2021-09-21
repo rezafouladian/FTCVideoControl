@@ -22,7 +22,8 @@ def event_stream_url(code): return "/api/v2/stream/?code=" + code
 
 
 def on_message(ws, message):
-    return("")
+    print(message)
+    return("message received")
 
 
 def on_error(ws, error):
@@ -40,6 +41,7 @@ def websocket_test():
         on_message=on_message,
         on_error=on_error,
         on_close=on_close)
+    ws_test.run_forever()
 
 
 if __name__ == "__main__":
