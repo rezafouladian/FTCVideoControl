@@ -20,6 +20,7 @@ def initialize_sections():
 
     settings.set_value('scorekeeper', 'hostname', 'localhost')
     settings.set_value('scorekeeper', 'event_code', 'none')
+    settings.set_value('scorekeeper', 'use_ssl', 'false')
 
     settings.write_config()
 
