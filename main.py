@@ -1,13 +1,10 @@
 import websocket
 
 # Temporary variables
-
 server_name = "localhost"
-
 event_code = "test1"
 
 # API URLs
-
 event_get_all_url = "/api/v1/events/"
 
 
@@ -25,9 +22,8 @@ def event_full_details_url(code):
 
 def event_stream_url(code):
     return "/api/v2/stream/?code=" + code
-
-
 # End API URLs
+
 
 def on_message(ws, message):
     return("")
