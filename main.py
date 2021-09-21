@@ -1,8 +1,10 @@
-import websocket
 import json
-from configparser import ConfigParser
-import scorekeeper_urls
 import os
+from configparser import ConfigParser
+
+import websocket
+
+import scorekeeper_urls
 
 config = ConfigParser()
 
