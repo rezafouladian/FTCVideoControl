@@ -15,3 +15,7 @@ if not settings.check_section('atem'):
     settings.set_value('atem', 'atem2_type', "none")
     settings.set_value('atem', 'atem3_type', "none")
     settings.set_value('atem', 'atem4_type', "none")
+
+
+def reload_config():
+    settings.load_config()

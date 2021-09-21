@@ -4,6 +4,15 @@ Module containing functions to generate API URLs
 All functions require a hostname, some also require the event code
 """
 
+import settings
+
+settings.load_config()
+use_ssl = settings.get_value('scorekeeper', 'use_ssl')
+
+
+def reload_config():
+    settings.load_config()
+
 
 def http_url_start(hostname):
     """Add http:// and a trailing backslash to the server name"""

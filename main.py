@@ -14,6 +14,8 @@ import scorekeeper_urls
 hostname = ""
 event_code = ""
 
+settings.load_config()
+
 
 def initialize_sections():
     """Initilize the config file with default values"""
@@ -28,8 +30,6 @@ def initialize_sections():
 def load_config():
     global hostname
     global event_code
-
-    settings.load_config()
 
     hostname = settings.get_value('scorekeeper', 'hostname')
     event_code = settings.get_value('scorekeeper', 'event_code')
@@ -61,8 +61,8 @@ def websocket_test():
 
 
 if __name__ == "__main__":
-    load_config()
     if not settings.check_section('scorekeeper'):
         initialize_sections()
+    load_config()
 
-    websocket_test()
+    # websocket_test()
