@@ -17,14 +17,21 @@ def write_config():
     config.write(open('config.ini', 'w'))
 
 
+def initialize_sections():
+    """Initilize the config file with default values"""
+
+    config.set('scorekeeper', 'hostname', 'localhost')
+    config.set('scorekeeper', 'event_code', 'none')
+
+    write_config()
+
+
 def create_config_file():
     """Creates a configuration file when one does not exist and
     initializes it with default values.
     """
 
     config.add_section('scorekeeper')
-    config.set('scorekeeper', 'hostname', 'localhost')
-    config.set('scorekeeper', 'event_code', 'none')
 
     # TODO Move these to modules
     # config.add_section('atem')
@@ -33,6 +40,7 @@ def create_config_file():
     # config.add_section('xsplit')
 
     write_config()
+    initialize_sections()
 
 
 # Websocket code
@@ -63,4 +71,9 @@ def websocket_test():
 if __name__ == "__main__":
     if not os.path.exists('config.ini'):
         create_config_file()
+    else:
+        config.read('config.ini')
+        if not config.has_section('scorekeeper'):
+            initialize_sections()
+
     websocket_test()
