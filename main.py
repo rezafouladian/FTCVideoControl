@@ -2,14 +2,35 @@ import websocket
 import json
 from configparser import ConfigParser
 import scorekeeper_urls
+import os
+
+config = ConfigParser()
 
 # Temporary variables
 server_name = "localhost"
 event_code = "test1"
 
 
+def write_config():
+    config.write(open('config.ini', 'w'))
+
+
 def create_config_file():
-    """Creates a configuration file when one does not exist"""
+    """Creates a configuration file when one does not exist and
+    initializes it with default values.
+    """
+
+    config.add_section('scorekeeper')
+    config.set('scorekeeper', 'hostname', 'localhost')
+    config.set('scorekeeper', 'event_code', 'none')
+
+    # TODO Move these to modules
+    # config.add_section('atem')
+    # config.add_section('tricaster')
+    # config.add_section('obs')
+    # config.add_section('xsplit')
+
+    write_config()
 
 
 # Websocket code
@@ -38,4 +59,6 @@ def websocket_test():
 
 
 if __name__ == "__main__":
+    if not os.path.exists('config.ini'):
+        create_config_file()
     websocket_test()
