@@ -4,6 +4,7 @@ import websocket
 
 import settings
 import atem
+import tricaster
 import scorekeeper_urls
 
 # TODO:
