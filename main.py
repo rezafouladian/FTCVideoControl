@@ -19,6 +19,7 @@ event_code = ""
 
 match_state = "none"
 match_start_time = 0
+match_number_current = 0
 
 settings.load_config()
 
@@ -47,6 +48,7 @@ def load_config():
 def on_message(ws, message):
     global match_start_time
     global match_state
+    global match_number_current
 
     update_type = json.loads(message)["updateType"]
     match_number = json.loads(message)["payload"]["number"]
@@ -56,6 +58,7 @@ def on_message(ws, message):
     if update_type == "MATCH_START":
         match_start_time = int(time.time())
         match_state = "started"
+        match_number_current = match_number
 
 
 def on_error(ws, error): print(error)

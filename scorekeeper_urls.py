@@ -79,6 +79,25 @@ def event_get_url(hostname, code):
         return http_url_start(hostname) + "/api/v1/events/" + code + "/"
 
 
+def get_elims(hostname, code):
+    """Returns an array of matches that have been played in eliminations."""
+    if use_ssl:
+        return https_url_start(hostname) + "/api/v1/events/" + code + "/elim/all/"
+    else:
+        return http_url_start(hostname) + "/api/v1/events/" + code + "/elim/all/"
+
+
+def get_quals(hostname, code):
+    """The Qualification match list for a given event. 
+    
+    If matchmaker has not been run when this is requested the match list will be empty.
+    """
+    if use_ssl:
+        return https_url_start(hostname) + "/api/v1/events/" + code + "/matches/"
+    else:
+        return http_url_start(hostname) + "/api/v1/events/" + code + "/matches/"
+
+
 def event_awards_url(hostname, code):
     if use_ssl:
         return https_url_start(hostname) + \
