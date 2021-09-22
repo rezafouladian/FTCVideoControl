@@ -3,10 +3,10 @@ import time
 
 import websocket
 
-import settings
 import atem
-import tricaster
 import scorekeeper_urls
+import settings
+import tricaster
 
 # TODO:
 #  Rate Limiting
