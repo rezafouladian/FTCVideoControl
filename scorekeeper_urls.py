@@ -85,6 +85,22 @@ def get_quals(hostname, code):
     return url_start(hostname) + "/api/v1/events/" + code + "/matches/"
 
 
+def get_active_matches(hostname, code):
+    """List of matches currently loaded for play."""
+
+    return url_start(hostname) + "/api/v1/events/" + code + "/matches/active/"
+
+
+def get_qual_info(hostname, code, match):
+    """Results for a match that has been played.
+
+    NO_SUCH_MATCH indicates either an invalid match number or
+    the match has not been played yet."""
+
+    return url_start(hostname) + "/api/v1/events/" + code + "/matches/" \
+        + match + "/"
+
+
 def event_awards_url(hostname, code):
     return url_start(hostname) + "/api/v2/events/" + code + "/awards/"
 
