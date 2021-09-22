@@ -7,12 +7,16 @@ All functions require a hostname, some also require the event code
 import settings
 
 settings.load_config()
-use_ssl = settings.get_value('scorekeeper', 'use_ssl')
+# Temporary fix to prevent errors
+if settings.check_section('scorekeeper'):
+    use_ssl = settings.get_value('scorekeeper', 'use_ssl')
 
 
 def reload_config():
     settings.load_config()
-    use_ssl = settings.get_value('scorekeeper', 'use_ssl')
+    # Temporary fix to prevent errors
+    if settings.check_section('scorekeeper'):
+        use_ssl = settings.get_value('scorekeeper', 'use_ssl')
 
 
 def http_url_start(hostname):
