@@ -34,6 +34,8 @@ def load_config():
     hostname = settings.get_value('scorekeeper', 'hostname')
     event_code = settings.get_value('scorekeeper', 'event_code')
 
+    scorekeeper_urls.reload_config()
+
 
 # Websocket code
 def on_message(ws, message):

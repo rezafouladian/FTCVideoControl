@@ -12,6 +12,7 @@ use_ssl = settings.get_value('scorekeeper', 'use_ssl')
 
 def reload_config():
     settings.load_config()
+    use_ssl = settings.get_value('scorekeeper', 'use_ssl')
 
 
 def http_url_start(hostname):
