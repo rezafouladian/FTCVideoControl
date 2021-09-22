@@ -1,3 +1,5 @@
+import PyATEMMax
+
 import settings
 
 settings.load_config()
