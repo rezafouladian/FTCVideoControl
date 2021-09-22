@@ -19,17 +19,13 @@ def reload_config():
         use_ssl = settings.get_value('scorekeeper', 'use_ssl')
 
 
-def http_url_start(hostname):
-    """Add http:// and a trailing backslash to the server name"""
+def url_start(hostname):
+    """Add http:// or https:// and a trailing backslash to the server name"""
 
-    return "http://" + hostname + "/"
-
-
-def https_url_start(hostname):
-    """Add https:// and a trailing backslash to the server name"""
-    # TODO: SSL support
-
-    return "https://" + hostname + "/"
+    if use_ssl:
+        return "https://" + hostname + "/"
+    else:
+        return "http://" + hostname + "/"
 
 
 def ws_url_start(hostname):
@@ -50,10 +46,7 @@ def event_get_all_url(hostname):
     }
     """
 
-    if use_ssl:
-        return https_url_start(hostname) + "/api/v1/events/"
-    else:
-        return http_url_start(hostname) + "/api/v1/events/"
+    return url_start(hostname) + "/api/v1/events/"
 
 
 def event_get_url(hostname, code):
@@ -73,44 +66,31 @@ def event_get_url(hostname, code):
     }
     """
 
-    if use_ssl:
-        return https_url_start(hostname) + "/api/v1/events/" + code + "/"
-    else:
-        return http_url_start(hostname) + "/api/v1/events/" + code + "/"
+    return url_start(hostname) + "/api/v1/events/" + code + "/"
 
 
 def get_elims(hostname, code):
     """Returns an array of matches that have been played in eliminations."""
-    if use_ssl:
-        return https_url_start(hostname) + "/api/v1/events/" + code + "/elim/all/"
-    else:
-        return http_url_start(hostname) + "/api/v1/events/" + code + "/elim/all/"
+
+    return url_start(hostname) + "/api/v1/events/" + code + "/elim/all/"
 
 
 def get_quals(hostname, code):
-    """The Qualification match list for a given event. 
-    
-    If matchmaker has not been run when this is requested the match list will be empty.
+    """The Qualification match list for a given event.
+
+    If matchmaker has not been run when this is requested the match list
+    will be empty.
     """
-    if use_ssl:
-        return https_url_start(hostname) + "/api/v1/events/" + code + "/matches/"
-    else:
-        return http_url_start(hostname) + "/api/v1/events/" + code + "/matches/"
+
+    return url_start(hostname) + "/api/v1/events/" + code + "/matches/"
 
 
 def event_awards_url(hostname, code):
-    if use_ssl:
-        return https_url_start(hostname) + \
-            "/api/v2/events/" + code + "/awards/"
-    else:
-        return http_url_start(hostname) + "/api/v2/events/" + code + "/awards/"
+    return url_start(hostname) + "/api/v2/events/" + code + "/awards/"
 
 
 def event_full_details_url(hostname, code):
-    if use_ssl:
-        return https_url_start(hostname) + "/api/v2/events/" + code + "/full/"
-    else:
-        return http_url_start(hostname) + "/api/v2/events/" + code + "/full/"
+    return url_start(hostname) + "/api/v2/events/" + code + "/full/"
 
 
 def event_stream_url(hostname, code):
