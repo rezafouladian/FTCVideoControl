@@ -1,7 +1,9 @@
 import json
 import time
 
+import requests
 import websocket
+from requests.exceptions import HTTPError
 
 import atem
 import scorekeeper_urls
@@ -15,6 +17,7 @@ MATCH_LENGTH = 159
 
 RATE_PER_MIN = 240
 RATE_PER_MIN_PLAY = 6
+RATE_TIME_PLAY = 10
 
 # Global variables
 hostname = ""
@@ -26,11 +29,13 @@ match_number_current = 0
 match_name_current = "none"
 current_field = 1
 
+last_request = 0
+
 settings.load_config()
 
 
 def initialize_sections():
-    """Initilize the config file with default values"""
+    """Initilize the config file with default values."""
 
     settings.set_value('scorekeeper', 'hostname', 'localhost')
     settings.set_value('scorekeeper', 'event_code', 'none')
@@ -47,6 +52,29 @@ def load_config():
     event_code = settings.get_value('scorekeeper', 'event_code')
 
     scorekeeper_urls.reload_config()
+
+
+def web_request(url):
+    try:
+        data = requests.get(url)
+        data.raise_for_status()
+    except HTTPError as http_error:
+        print(http_error)
+    except Exception as error:
+        print(error)
+    else:
+        return data.text
+
+
+def api_request(url):
+    """Requests from the API observing rate limit."""
+    global last_request
+
+    if int(time.time()) > (last_request + RATE_TIME_PLAY):
+        last_request = int(time.time())
+        return web_request(url)
+    else:
+        pass
 
 
 # Websocket code

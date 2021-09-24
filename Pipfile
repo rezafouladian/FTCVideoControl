@@ -8,6 +8,7 @@ configparser = "*"
 websocket-client = "*"
 pyatemmax = "*"
 pycodestyle = "*"
+requests = "*"
 
 [dev-packages]
 
