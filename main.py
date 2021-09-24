@@ -13,6 +13,9 @@ import tricaster
 
 MATCH_LENGTH = 159
 
+RATE_PER_MIN = 240
+RATE_PER_MIN_PLAY = 6
+
 # Global variables
 hostname = ""
 event_code = ""
