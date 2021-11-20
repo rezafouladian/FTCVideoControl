@@ -129,5 +129,3 @@ if __name__ == "__main__":
     if not settings.check_section('scorekeeper'):
         initialize_sections()
     load_config()
-
-    # websocket_test()
